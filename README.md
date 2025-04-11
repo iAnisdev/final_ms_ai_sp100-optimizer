@@ -46,9 +46,27 @@ Both methods are evaluated using historical stock price data from the `yfinance`
 
 ## 💻 Installation
 
-Install required Python packages:
+### 1. Create and Activate Virtual Environment
+
+First, create a virtual environment to isolate project dependencies:
 
 ```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows:
+# .\venv\Scripts\activate
+```
+
+### 2. Install Dependencies
+
+With the virtual environment activated, install the required packages:
+
+```bash
+# Install from requirements.txt
 pip install -r requirements.txt
 ```
 
