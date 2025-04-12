@@ -1,21 +1,21 @@
-# Sets
-set STOCKS;
+# ============================
+# Index Fund Optimization Model
+# ============================
 
-# Parameters
-param r {STOCKS};         # Return of each stock
+# --- Sets ---
+set STOCKS;  # Set of selected stock tickers
 
-# Variables
-var w {i in STOCKS} >= 0;  # Weight of each stock
+# --- Parameters ---
+param r {STOCKS};          # Average return of each stock
+param target_return;       # Benchmark return to track (e.g., S&P 100)
 
-# Constraint: Fully invested portfolio
+# --- Variables ---
+var w {i in STOCKS} >= 0;   # Weight allocated to each stock (no shorting allowed)
+
+# --- Constraints ---
+# Ensure full investment: sum of weights = 1
 s.t. total_weight:
     sum {i in STOCKS} w[i] = 1;
 
-# Objective: Match benchmark return (e.g., minimize squared error from average benchmark return)
-# Here we simulate matching an average benchmark return (replace with actual value if needed)
-param target_return;  # Could be mean of ^OEX or fixed
-
-minimize tracking_error:
-    (sum {i in STOCKS} w[i] * r[i] - target_return)^2;
-
-param target_return := <insert value here>;
+# --- Objective ---
+# Minimize squared error between portfolio return and benchmark return
