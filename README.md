@@ -70,6 +70,51 @@ With the virtual environment activated, install the required packages:
 pip install -r requirements.txt
 ```
 
+### 3. AMPL Setup
+
+To run the optimization notebooks locally, you'll need to:
+
+1. Install AMPL on your system:
+   - Download AMPL from [AMPL's official website](https://ampl.com/products/ampl/)
+   - Follow the installation instructions for your operating system
+
+2. Update the AMPL path in the notebooks:
+   - In `notebooks/03_ampl_model_setup.ipynb`, update the following line with your AMPL installation path:
+   ```python
+   add_to_path("/Applications/AMPL")  # Update this path to your AMPL installation
+   ```
+   - For Windows, it might look like: `add_to_path("C:/AMPL")`
+   - For Linux, it might look like: `add_to_path("/opt/ampl")`
+
+3. The optimization model files are located in the `optimization/` folder:
+   - `index_model.mod`: Contains the optimization model
+   - `index_data.dat`: Contains the input data for the model
+
+4. Running AMPL locally:
+   ```bash
+   # Start AMPL command line interface
+   ampl
+
+   # Load the model file
+   model optimization/index_model.mod;
+
+   # Load the data file
+   data optimization/index_data.dat;
+
+   # Set the solver (e.g., MINOS)
+   option solver minos;
+
+   # Solve the optimization problem
+   solve;
+
+   # Display the solution
+   display w;
+   display tracking_error;
+
+   # Save the solution to a file
+   display w > optimization/solution.txt;
+   ```
+
 ## 🛠️ Tools & Technologies
 
 - Python (pandas, yfinance, numpy, sklearn)
